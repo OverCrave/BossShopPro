@@ -1,3 +1,5 @@
+This fork has removed alot of support for other plugins. I also will only support the currently latest version of Minecraft in this.
+
 # BossShopPro
 
 BossShopPro is one of the most player-friendly and multifunctional GUI plugins ever! Say goodbye to all the annoying command- or signshops!
