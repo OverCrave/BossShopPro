@@ -6,7 +6,6 @@ import org.black_ixx.bossshop.managers.misc.InputReader;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.PotionMeta;
-import org.bukkit.potion.PotionData;
 import org.bukkit.potion.PotionType;
 
 import java.util.List;
@@ -45,7 +44,7 @@ public class ItemDataPartPotion extends ItemDataPart {
             return item;
         }
 
-        meta.setBasePotionData(new PotionData(type, extended, upgraded));
+        meta.setBasePotionType(type);
         item.setItemMeta(meta);
 
         return item;
@@ -70,8 +69,8 @@ public class ItemDataPartPotion extends ItemDataPart {
     public List<String> read(ItemStack i, List<String> output) {
         if (i.getItemMeta() instanceof PotionMeta) {
             PotionMeta meta = (PotionMeta) i.getItemMeta();
-            if (meta.getBasePotionData() != null) {
-                output.add("potion:" + meta.getBasePotionData().getType().name() + "#" + meta.getBasePotionData().isExtended() + "#" + meta.getBasePotionData().isUpgraded());
+            if (meta.getBasePotionType() != null) {
+                output.add("potion:" + meta.getBasePotionType().name());
             }
         }
         return output;
@@ -89,18 +88,11 @@ public class ItemDataPartPotion extends ItemDataPart {
             PotionMeta ms = (PotionMeta) shop_item.getItemMeta();
             PotionMeta mp = (PotionMeta) player_item.getItemMeta();
 
-            if (ms.getBasePotionData().getType() == PotionType.WATER || ms.getBasePotionData().getType() == PotionType.UNCRAFTABLE) {
+            if (ms.getBasePotionType() == PotionType.WATER) {
                 return true;
             }
 
-            if (ms.getBasePotionData().getType() != mp.getBasePotionData().getType()) {
-                return false;
-            }
-
-            if (ms.getBasePotionData().isExtended() & !mp.getBasePotionData().isExtended()) {
-                return false;
-            }
-            if (ms.getBasePotionData().isUpgraded() & !mp.getBasePotionData().isUpgraded()) {
+            if (ms.getBasePotionType() != mp.getBasePotionType()) {
                 return false;
             }
 
