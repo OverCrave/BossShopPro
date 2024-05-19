@@ -31,7 +31,7 @@ public class BSPriceTypePoints extends BSPriceTypeNumber {
     @Override
     public boolean hasPrice(Player p, BSBuy buy, Object price, ClickType clickType, int multiplier, boolean messageOnFailure) {
         double points = ClassManager.manager.getMultiplierHandler().calculatePriceWithMultiplier(p, buy, clickType, (Double) price) * multiplier;
-        if (ClassManager.manager.getPointsManager().getPoints(p) < points) {
+        if (0 < points) {
             if (messageOnFailure) {
                 ClassManager.manager.getMessageHandler().sendMessage("NotEnough.Points", p);
             }
@@ -43,14 +43,13 @@ public class BSPriceTypePoints extends BSPriceTypeNumber {
     @Override
     public String takePrice(Player p, BSBuy buy, Object price, ClickType clickType, int multiplier) {
         double points = ClassManager.manager.getMultiplierHandler().calculatePriceWithMultiplier(p, buy, clickType, (Double) price) * multiplier;
-        ClassManager.manager.getPointsManager().takePoints(p, points);
 
         return getDisplayBalance(p, buy, price, clickType);
     }
 
     @Override
     public String getDisplayBalance(Player p, BSBuy buy, Object price, ClickType clickType) {
-        double balance_points = ClassManager.manager.getPointsManager().getPoints(p);
+        double balance_points = 0;
         return ClassManager.manager.getMessageHandler().get("Display.Points").replace("%points%", MathTools.displayNumber(balance_points, BSPriceType.Points));
     }
 

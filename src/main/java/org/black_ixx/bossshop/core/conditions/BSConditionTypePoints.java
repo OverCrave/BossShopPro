@@ -9,7 +9,7 @@ public class BSConditionTypePoints extends BSConditionTypeNumber {
 
     @Override
     public double getNumber(BSBuy shopitem, BSShopHolder holder, Player p) {
-        return ClassManager.manager.getPointsManager().getPoints(p);
+        return 0;
     }
 
     @Override

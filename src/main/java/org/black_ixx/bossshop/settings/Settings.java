@@ -1,7 +1,6 @@
 package org.black_ixx.bossshop.settings;
 
 import org.black_ixx.bossshop.managers.ClassManager;
-import org.black_ixx.bossshop.managers.features.PointsManager.PointsPlugin;
 import org.bukkit.configuration.Configuration;
 import org.bukkit.configuration.ConfigurationSection;
 
@@ -31,7 +30,6 @@ public class Settings {
     private boolean metrics = true;
     private int serverpinging_delay, serverpinging_waittime, serverpinging_timeout, autorefresh_delay, max_line_length, number_grouping_size, input_timeout;
     private String mainshop, number_locale;
-    private PointsPlugin pointsplugin;
     private List<String> money_formatting, points_formatting;
 
     private boolean debug;
@@ -254,14 +252,6 @@ public class Settings {
 
     public void setDebugEnabled(boolean b) {
         debug = b;
-    }
-
-    public PointsPlugin getPointsPlugin() {
-        return pointsplugin;
-    }
-
-    public void setPointsPlugin(PointsPlugin p) {
-        pointsplugin = p;
     }
 
     public boolean getTransactionLogEnabled() {

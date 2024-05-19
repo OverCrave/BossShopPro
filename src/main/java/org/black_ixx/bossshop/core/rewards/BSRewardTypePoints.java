@@ -35,7 +35,6 @@ public class BSRewardTypePoints extends BSRewardTypeNumber {
     @Override
     public void giveReward(Player p, BSBuy buy, Object reward, ClickType clickType, int multiplier) {
         double points = ClassManager.manager.getMultiplierHandler().calculateRewardWithMultiplier(p, buy, clickType, ((Double) reward)) * multiplier;
-        ClassManager.manager.getPointsManager().givePoints(p, points);
     }
 
     @Override

@@ -16,7 +16,6 @@ import org.black_ixx.bossshop.managers.external.VaultHandler;
 import org.black_ixx.bossshop.managers.external.spawners.ISpawnEggHandler;
 import org.black_ixx.bossshop.managers.external.spawners.ISpawnerHandler;
 import org.black_ixx.bossshop.managers.external.spawners.SpawnersHandlerEpicSpawners;
-import org.black_ixx.bossshop.managers.external.spawners.SpawnersHandlerSilkSpawners;
 import org.black_ixx.bossshop.managers.features.*;
 import org.black_ixx.bossshop.managers.item.ItemDataPart;
 import org.black_ixx.bossshop.managers.item.ItemStackChecker;
@@ -39,7 +38,6 @@ public class ClassManager {
 
 
     ///////////////////////////////
-    private PointsManager pointsmanager;
     private VaultHandler vaulthandler;
     private PlaceholderAPIHandler placeholderhandler;
     private MessageHandler messagehandler;
@@ -103,9 +101,6 @@ public class ClassManager {
         if (Bukkit.getPluginManager().isPluginEnabled("SilkSpawners")) {
             try {
                 Class.forName("de.dustplanet.util.SilkUtil");
-                SpawnersHandlerSilkSpawners h = new SpawnersHandlerSilkSpawners();
-                spawnerHandler = h;
-                spawnEggHandler = h;
             } catch (ClassNotFoundException e) {
                 getBugFinder().warn("It seems like you have 'SilkSpawners' installed, but BossShopPro does not recognize the API of the plugin. " +
                         "Note: There are different SilkSpawners plugins around. The one BossShopPro can hook into is https://www.spigotmc.org/resources/7811/. " +
@@ -129,10 +124,6 @@ public class ClassManager {
         plugin.getInventoryListener().init(config.getInt("ClickDelay"), config.getInt("ClickSpamKick.ClickDelay"), config.getInt("ClickSpamKick.Warnings"), config.getInt("ClickSpamKick.ForgetTime"));
 
         pagelayoutHandler = new PageLayoutHandler(plugin);
-
-        //if (settings.getPointsEnabled()){ Is not known because shops are not yet loaded. But is required before shops are loaded in order to be able to display items properly.
-        pointsmanager = new PointsManager();
-        //}
 
         shops = new BSShops(plugin, settings);
 
@@ -190,10 +181,6 @@ public class ClassManager {
 
     public StringManager getStringManager() {
         return stringmanager;
-    }
-
-    public PointsManager getPointsManager() {
-        return pointsmanager;
     }
 
     public VaultHandler getVaultHandler() {

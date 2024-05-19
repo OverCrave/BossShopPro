@@ -49,11 +49,8 @@ public class CurrencyTools {
                 return true;
 
             case POINTS:
-                if (ClassManager.manager.getPointsManager().getPoints(p) < value) {
-                    ClassManager.manager.getMessageHandler().sendMessage("NotEnough.Points", p);
-                    return false;
-                }
-                return true;
+                ClassManager.manager.getMessageHandler().sendMessage("NotEnough.Points", p);
+                return false;
         }
 
         return false;
@@ -83,8 +80,7 @@ public class CurrencyTools {
                 return ClassManager.manager.getMessageHandler().get("Display.Money").replace("%money%", MathTools.displayNumber(balance, BSPriceType.Money));
 
             case POINTS:
-                double balance_points = ClassManager.manager.getPointsManager().takePoints(p, cost);
-                return ClassManager.manager.getMessageHandler().get("Display.Points").replace("%points%", MathTools.displayNumber(balance_points, BSPriceType.Points));
+                return ClassManager.manager.getMessageHandler().get("Display.Points").replace("%points%", MathTools.displayNumber(0, BSPriceType.Points));
         }
 
         return "";
@@ -120,7 +116,6 @@ public class CurrencyTools {
                 return;
 
             case POINTS:
-                ClassManager.manager.getPointsManager().givePoints(p, reward);
                 return;
         }
     }
@@ -196,7 +191,7 @@ public class CurrencyTools {
 
             @Override
             public double getBalance(Player p) {
-                return ClassManager.manager.getPointsManager().getPoints(p);
+                return 0;
             }
         };
 

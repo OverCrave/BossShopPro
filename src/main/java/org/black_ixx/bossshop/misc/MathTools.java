@@ -109,9 +109,7 @@ public class MathTools {
 
     public static boolean isIntegerValue(BSPriceType pricetype) {
         if (pricetype == BSPriceType.Points) {
-            if (!ClassManager.manager.getPointsManager().usesDoubleValues()) {
-                return true;
-            }
+            return true;
         }
         if (pricetype == BSPriceType.Exp) {
             return true;

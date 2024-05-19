@@ -126,10 +126,6 @@ public class StringManager {
                     s = s.replace("%balance%", MathTools.displayNumber(balance, BSPriceType.Money));
                 }
             }
-            if (s.contains("%balancepoints%") && ClassManager.manager.getPointsManager() != null) {
-                double balance_points = ClassManager.manager.getPointsManager().getPoints(target);
-                s = s.replace("%balancepoints%", MathTools.displayNumber(balance_points, BSPriceType.Points));
-            }
 
             if (s.contains("%world%")) {
                 s = s.replace("%world%", target.getWorld().getName());
