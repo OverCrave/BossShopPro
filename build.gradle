@@ -70,11 +70,6 @@ dependencies {
     implementation 'com.mojang:authlib:1.5.21'
 }
 
-tasks.clean {
-    delete "$rootDir/build/"
-    delete "$rootDir/.gradle/"
-}
-
 tasks.runServer{
     minecraftVersion("1.20.6")
     downloadPlugins {
