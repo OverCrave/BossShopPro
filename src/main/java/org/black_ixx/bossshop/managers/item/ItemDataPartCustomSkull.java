@@ -5,6 +5,7 @@ import com.mojang.authlib.properties.Property;
 import org.apache.commons.codec.binary.Base64;
 import org.black_ixx.bossshop.core.BSBuy;
 import org.black_ixx.bossshop.managers.ClassManager;
+import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -16,6 +17,10 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 import java.util.UUID;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class ItemDataPartCustomSkull extends ItemDataPart {
 
@@ -61,24 +66,25 @@ public class ItemDataPartCustomSkull extends ItemDataPart {
             try {
                 profileField = meta.getClass().getDeclaredField("profile");
                 profileField.setAccessible(true);
-
                 GameProfile profile = (GameProfile) profileField.get(meta);
                 if (profile != null) {
                     if (profile.getProperties() != null) {
                         Collection<Property> properties = profile.getProperties().get("textures");
-                        if (properties != null) {
-
-                            Iterator<Property> iterator = properties.iterator();
-                            if (iterator.hasNext()) {
-                                Property property = iterator.next();
-                                return property.value();
+                        Iterator<Property> iterator = properties.iterator();
+                        if (iterator.hasNext()) {
+                            Property property = iterator.next();
+                            String propStr = property.toString();
+                            Pattern pattern = Pattern.compile("value=([^,]+),");
+                            Matcher matcher = pattern.matcher(propStr);
+                            if (matcher.find()) {
+                                return matcher.group(1);
                             }
                         }
                     }
                 }
-
-            } catch (Exception e) {
-                e.printStackTrace();
+            } catch (Throwable e) {
+                Logger logger = Bukkit.getLogger();
+                logger.log(Level.WARNING, e.getMessage(), e);
             }
         }
         return null;

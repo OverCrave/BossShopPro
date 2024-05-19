@@ -47,10 +47,6 @@ repositories {
     }
 
     maven {
-        url = uri('https://libraries.minecraft.net/')
-    }
-
-    maven {
         url = uri('https://repo.extendedclip.com/content/repositories/placeholderapi/')
     }
 

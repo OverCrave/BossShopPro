@@ -1,5 +1,6 @@
 package org.black_ixx.bossshop.managers;
 
+import org.black_ixx.bossshop.BossShop;
 import org.black_ixx.bossshop.core.BSBuy;
 import org.black_ixx.bossshop.core.BSShop;
 import org.black_ixx.bossshop.core.BSShopHolder;
@@ -13,9 +14,12 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Set;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 
 public class ShopCustomizer {
@@ -198,7 +202,6 @@ public class ShopCustomizer {
         }
         inventory.setItem(slot, item);
     }
-
 
     /**
      * Show the item in an inventory
